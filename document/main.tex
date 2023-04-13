@@ -202,28 +202,29 @@ $I_A$, $I_B$, $I_O$, $B_e$, $N$, $X$, $C_i$는 ArithmetricLogic에 입력되는 
 $E$, $R$, $L$는 Shiftre에 입력되는 핀이다.
 
 OpCodeToFlags의 진리표는 \tablename{} \ref{tab:octf}과 같다.
+기울인꼴로 표현된 것은 무관조건이다.
 
 \begin{table}[h]
     \centering
     \begin{tabular}{cl||ccccccc|ccc}
         $O_c$ & 연산자 & $I_A$ & $I_B$ & $I_O$ & $B_e$ & $N$ & $X$ & $C_i$ & $E$ & $R$ & $L$ \\
         \hline
-        \texttt{0} & A    & 0 & 0 & 0 & 0 & - & - & 0 & 0 & - & - \\
-        \texttt{1} & NOT  & 1 & 0 & 0 & 0 & - & - & 0 & 0 & - & - \\
-        \texttt{2} & NEG  & 1 & 0 & 0 & 0 & - & - & 1 & 0 & - & - \\
-        \texttt{3} & SHL  & 0 & 0 & 0 & 0 & - & - & 0 & 1 & 0 & - \\
-        \texttt{4} & INC  & 0 & 0 & 0 & 0 & - & - & 1 & 0 & - & - \\
-        \texttt{5} & DEC  & 0 & 1 & 0 & 1 & 0 & 0 & 0 & 0 & - & - \\
-        \texttt{6} & ADD  & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & - & - \\
-        \texttt{7} & SUB  & 0 & 1 & 0 & 0 & 0 & 0 & 1 & 0 & - & - \\
-        \texttt{8} & XOR  & 0 & 0 & 0 & 1 & 0 & 1 & 0 & 0 & - & - \\
-        \texttt{9} & XNOR & 0 & 0 & 1 & 1 & 0 & 1 & 0 & 0 & - & - \\
-        \texttt{A} & AND  & 0 & 0 & 0 & 1 & 1 & 0 & 0 & 0 & - & - \\
-        \texttt{B} & NAND & 0 & 0 & 1 & 1 & 1 & 0 & 0 & 0 & - & - \\
-        \texttt{C} & OR   & 1 & 1 & 1 & 0 & 1 & 0 & 0 & 0 & - & - \\
-        \texttt{D} & NOR  & 1 & 1 & 0 & 0 & 1 & 0 & 0 & 0 & - & - \\
-        \texttt{E} & ASR  & 0 & 0 & 0 & 0 & - & - & 0 & 1 & 1 & 0 \\
-        \texttt{F} & ASR  & 0 & 0 & 0 & 0 & - & - & 0 & 1 & 1 & 1 \\
+        \texttt{0} & A    & 0 & 0 & 0 & 0 & \textit 0 & \textit 1 & 0 & 0 & \textit 0 & \textit 0 \\
+        \texttt{1} & NOT  & 1 & 0 & 0 & 0 & \textit 0 & \textit 1 & 0 & 0 & \textit 0 & \textit 1 \\
+        \texttt{2} & NEG  & 1 & 0 & 0 & 0 & \textit 1 & \textit 0 & 1 & 0 & \textit 0 & \textit 0 \\
+        \texttt{3} & SHL  & 0 & 0 & 0 & 0 & \textit 1 & \textit 0 & 0 & 1 & 0 & \textit 1\\
+        \texttt{4} & INC  & 0 & 0 & 0 & 0 & \textit 0 & \textit 0 & 1 & 0 & \textit 1& \textit 0 \\
+        \texttt{5} & DEC  & 0 & 1 & 0 & 1 & 0 & 0 & 0 & 0 & \textit 1& \textit 1\\
+        \texttt{6} & ADD  & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & \textit 1& \textit 0 \\
+        \texttt{7} & SUB  & 0 & 1 & 0 & 0 & 0 & 0 & 1 & 0 & \textit 1& \textit 1\\
+        \texttt{8} & XOR  & 0 & 0 & 0 & 1 & 0 & 1 & 0 & 0 & \textit 0 & \textit 0 \\
+        \texttt{9} & XNOR & 0 & 0 & 1 & 1 & 0 & 1 & 0 & 0 & \textit 0 & \textit 1\\
+        \texttt{A} & AND  & 0 & 0 & 0 & 1 & 1 & 0 & 0 & 0 & \textit 0 & \textit 0 \\
+        \texttt{B} & NAND & 0 & 0 & 1 & 1 & 1 & 0 & 0 & 0 & \textit 0 & \textit 1\\
+        \texttt{C} & OR   & 1 & 1 & 1 & 0 & 1 & 0 & 0 & 0 & \textit 1& \textit 0 \\
+        \texttt{D} & NOR  & 1 & 1 & 0 & 0 & 1 & 0 & 0 & 0 & \textit 1& \textit 1\\
+        \texttt{E} & ASR  & 0 & 0 & 0 & 0 & \textit 1& \textit 0 & 0 & 1 & 1 & 0 \\
+        \texttt{F} & ASR  & 0 & 0 & 0 & 0 & \textit 1& \textit 0 & 0 & 1 & 1 & 1 \\
     \end{tabular}
     \caption{OpCodeToFlags의 진리표}
     \label{tab:octf}
