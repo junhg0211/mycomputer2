@@ -173,4 +173,51 @@ $O$, $O_l$, $O_r$의 출력 핀을 가지고 있다. 각각은 다음을 의미�
     \label{fig:shr}
 \end{figure}
 
+\pagebreak
+
+\subsection{OpCodeToFlags}
+
+OpCodeToFlags는 4비트 연산자 코드를 ArithmetricLogic 플래그로 변환해주는
+부품이다.
+
+OpCodeToFlags는 $O_c$의 입력 핀과
+$I_A$, $I_B$, $I_O$, $B_e$, $N$, $X$, $C_i$, $E$, $R$, $L$ 출력 핀을 가지고 있다.
+$I_A$, $I_B$, $I_O$, $B_e$, $N$, $X$, $C_i$는 ArithmetricLogic에 입력되는 핀이고
+$E$, $R$, $L$는 Shiftre에 입력되는 핀이다.
+
+OpCodeToFlags의 진리표는 \tablename{} \ref{tab:octf}과 같다.
+
+\begin{table}
+    \centering
+    \begin{tabular}{cl||ccccccc|ccc}
+        $O_c$ & 연산자 & $I_A$ & $I_B$ & $I_O$ & $B_e$ & $N$ & $X$ & $C_i$ & $E$ & $R$ & $L$ \\
+        \hline
+        \texttt{0} & A    & 0 & 0 & 0 & 0 & - & - & 0 & 0 & - & - \\
+        \texttt{1} & NOT  & 1 & 0 & 0 & 0 & - & - & 0 & 0 & - & - \\
+        \texttt{2} & NEG  & 1 & 0 & 0 & 0 & - & - & 1 & 0 & - & - \\
+        \texttt{3} & SHL  & 0 & 0 & 0 & 0 & - & - & 0 & 1 & 0 & - \\
+        \texttt{4} & INC  & 0 & 0 & 0 & 0 & - & - & 1 & 0 & - & - \\
+        \texttt{5} & DEC  & 0 & 1 & 0 & 1 & 0 & 0 & 0 & 0 & - & - \\
+        \texttt{6} & ADD  & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & - & - \\
+        \texttt{7} & SUB  & 0 & 1 & 0 & 0 & 0 & 0 & 1 & 0 & - & - \\
+        \texttt{8} & XOR  & 0 & 0 & 0 & 1 & 0 & 1 & 0 & 0 & - & - \\
+        \texttt{9} & XNOR & 0 & 0 & 1 & 1 & 0 & 1 & 0 & 0 & - & - \\
+        \texttt{A} & AND  & 0 & 0 & 0 & 1 & 1 & 0 & 0 & 0 & - & - \\
+        \texttt{B} & NAND & 0 & 0 & 1 & 1 & 1 & 0 & 0 & 0 & - & - \\
+        \texttt{C} & OR   & 1 & 1 & 1 & 0 & 1 & 0 & 0 & 0 & - & - \\
+        \texttt{D} & NOR  & 1 & 1 & 0 & 0 & 1 & 0 & 0 & 0 & - & - \\
+        \texttt{E} & ASR  & 0 & 0 & 0 & 0 & - & - & 0 & 1 & 1 & 0 \\
+        \texttt{F} & ASR  & 0 & 0 & 0 & 0 & - & - & 0 & 1 & 1 & 1 \\
+    \end{tabular}
+    \caption{OpCodeToFlags의 진리표}
+    \label{tab:octf}
+\end{table}
+
+\begin{figure}[p]
+    \centering
+    \includegraphics[scale=0.35]{OpCodeToFlags} \\
+    \caption{OpCodeToFlags의 회로도}
+    \label{fig:octf}
+\end{figure}
+
 \end{document}
