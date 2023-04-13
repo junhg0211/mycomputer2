@@ -138,7 +138,7 @@ ArithmetricLogic은 \tablename{} \ref{tab:al}와 같은 진리표를 가진다.
     \label{fig:al}
 \end{figure}
 
-\pagebreak % CAUTION
+\pagebreak
 
 \subsection{Shiftre}
 
@@ -164,6 +164,22 @@ $O$, $O_l$, $O_r$의 출력 핀을 가지고 있다. 각각은 다음을 의미�
     \item $O_r$ -- Overflow Right. 오른쪽 시프트 수행 중에 오버플로우가 발생함
 \end{itemize}
 
+\tablename{} \ref{tab:shr}은 Shiftre의 표이다.
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c|ccc|ccc}
+        $I$ & $E$ & $R$ & $L$ & $O$ & $O_l$ & $O_r$ \\
+        \hline
+        \texttt{abcd efgh} & 0 & - & - & \texttt{abcd efgh} & 0 & 0 \\
+        \texttt{abcd efgh} & 1 & 0 & - & \texttt{bcde fgh0} & \texttt a & 0 \\
+        \texttt{abcd efgh} & 1 & 1 & 0 & \texttt{0abc defg} & 0 & \texttt h \\
+        \texttt{abcd efgh} & 1 & 1 & 1 & \texttt{aabc defg} & 0 & \texttt h \\
+    \end{tabular}
+    \caption{Shiftre의 진리표}
+    \label{tab:shr}
+\end{table}
+
 \figurename{} \ref{fig:shr}은 Shiftre의 회로도이다.
 
 \begin{figure}[p]
@@ -187,7 +203,7 @@ $E$, $R$, $L$는 Shiftre에 입력되는 핀이다.
 
 OpCodeToFlags의 진리표는 \tablename{} \ref{tab:octf}과 같다.
 
-\begin{table}
+\begin{table}[h]
     \centering
     \begin{tabular}{cl||ccccccc|ccc}
         $O_c$ & 연산자 & $I_A$ & $I_B$ & $I_O$ & $B_e$ & $N$ & $X$ & $C_i$ & $E$ & $R$ & $L$ \\
@@ -212,6 +228,8 @@ OpCodeToFlags의 진리표는 \tablename{} \ref{tab:octf}과 같다.
     \caption{OpCodeToFlags의 진리표}
     \label{tab:octf}
 \end{table}
+
+OpCodeToFlags의 회로도는 \figurename{} \ref{fig:octf}과 같다.
 
 \begin{figure}[p]
     \centering
