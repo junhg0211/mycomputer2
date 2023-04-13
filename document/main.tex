@@ -21,12 +21,14 @@
 
 \section{부품 설계}
 
-\subsection{ArithmetricLogicBit}
+\subsection{보조 부품}
 
-ArithmetricLogicBit는 논리곱과 배타적 논리합,
-전가산 결과를 출력하는 ArithmetricLogic의 구성 부품이다.
+\subsubsection{ArithmeticLogicBit}
 
-ArithmetricLogicBit는
+ArithmeticLogicBit는 논리곱과 배타적 논리합,
+전가산 결과를 출력하는 ArithmeticLogic의 구성 부품이다.
+
+ArithmeticLogicBit는
 $A$, $B$, $C_i$, $N$, $X$의 입력 핀과
 $C_o$, $O$의 출력 핀을 가지고 있고,
 각각은 다음을 의미한다.
@@ -41,7 +43,7 @@ $C_o$, $O$의 출력 핀을 가지고 있고,
     \item $O$ -- Output. 연산의 결과
 \end{itemize}
 
-ArithmetricLogicBit의 진리표는 \tablename{} \ref{tab:alb}과 같이 주어진다.
+ArithmeticLogicBit의 진리표는 \tablename{} \ref{tab:alb}과 같이 주어진다.
 
 \begin{table}[h]
     \centering
@@ -52,25 +54,26 @@ ArithmetricLogicBit의 진리표는 \tablename{} \ref{tab:alb}과 같이 주어�
         $A$ & $B$ & $C_i$ &  0 &  1 &  0 & $A \oplus B$ \\
         $A$ & $B$ & $C_i$ &  1 &  0 &  0 & $AB$ \\
     \end{tabular}
-    \caption{ArithmetricLogicBit의 진리표}
+    \caption{ArithmeticLogicBit의 진리표}
     \label{tab:alb}
 \end{table}
 
-\figurename{} \ref{fig:alb}은 ArithmetricLogicBit의 회로도이다.
+\figurename{} \ref{fig:alb}은 ArithmeticLogicBit의 회로도이다.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[scale=0.5]{ArithmetricLogicBit} \\
-    \caption{ArithmetricLogicBit의 회로도}
+    \includegraphics[scale=0.5]{ArithmeticLogicBit} \\
+    \caption{ArithmeticLogicBit의 회로도}
     \label{fig:alb}
 \end{figure}
 
-\subsection{ArithmetricLogic}
+\subsubsection{ArithmeticLogic}
 
-ArithmetricLogic은 8비트 정수의 산술 연산과 논리 연산을 수행하는 부품이다.
+ArithmeticLogic은 8비트 정수의 산술 연산과 논리 연산을 수행하는 부품이다.
 
-ArithmetricLogic은 $A$, $B$, $I_A$, $I_B$, $I_O$, $B_e$, $N$, $X$, $C_i$의 입력 핀과
+ArithmeticLogic은 $A$, $B$, $I_A$, $I_B$, $I_O$, $B_e$, $N$, $X$, $C_i$의 입력 핀과
 $O$, $C_o$의 출력 핀을 가지고 있다.
+이중에서 $A$, $B$, $O$는 8비트 핀이다.
 각각은 다음을 의미한다.
 
 \begin{itemize}
@@ -87,12 +90,12 @@ $O$, $C_o$의 출력 핀을 가지고 있다.
     \item $C_o$ -- Carry Out. 가산 연산에서 발생한 올림 비트
 \end{itemize}
 
-ArithmetricLogic은 입력되는 옵션에 따라 두 인자 $A$, $B$에 대한
+ArithmeticLogic은 입력되는 옵션에 따라 두 인자 $A$, $B$에 대한
 $A$, $\neg A$, $A+1$, $A-1$, $A+B$, $A-B$, $-A$, $B-A$,
 $A \veebar B$, $\neg(A \veebar B)$, $A\wedge B$, $\neg (A \wedge B)$, $A \vee B$, $\neg(A \vee B)$ 등을
 계산할 수 있다.
 
-ArithmetricLogic은 \tablename{} \ref{tab:al}와 같은 진리표를 가진다.
+ArithmeticLogic은 \tablename{} \ref{tab:al}와 같은 진리표를 가진다.
 논리합($\vee$)과 산술합($+$) 연산에 주의해야 한다.
 
 \begin{table}[p]
@@ -125,28 +128,30 @@ ArithmetricLogic은 \tablename{} \ref{tab:al}와 같은 진리표를 가진다.
         $A$ & $B$ & 1 & 1 & 0 & 1 & 0 & 0 & 1 & $-A-1$ & 1 \\
         $A$ & $B$ & 1 & 1 & 1 & 0 & 1 & 0 & 0 & $A \vee B$ & 0 \\
     \end{tabular}
-    \caption{ArithmetricLogic}
+    \caption{ArithmeticLogic}
     \label{tab:al}
 \end{table}
 
-\figurename{} \ref{fig:al}은 ArithmetricLogic의 회로도이다.
+\figurename{} \ref{fig:al}은 ArithmeticLogic의 회로도이다.
 
 \begin{figure}[p]
     \centering
-    \includegraphics[scale=0.35]{ArithmetricLogic} \\
-    \caption{ArithmetricLogic의 회로도}
+    \includegraphics[scale=0.35]{ArithmeticLogic} \\
+    \caption{ArithmeticLogic의 회로도}
     \label{fig:al}
 \end{figure}
 
 \pagebreak
 
-\subsection{Shiftre}
+\subsubsection{Shiftre}
 
 Shiftre는 입력된 값에 대한 1회 좌측·우측 시프트 연산 결과를 출력하는
 부품이다.
 
 Shiftre는 $I$, $S$, $R$, $L$의 입력 핀과
-$O$, $O_l$, $O_r$의 출력 핀을 가지고 있다. 각각은 다음을 의미한다.
+$O$, $O_l$, $O_r$의 출력 핀을 가지고 있다.
+이중에서 $I$, $O$는 8비트 핀이다.
+각각은 다음을 의미한다.
 
 \begin{itemize}
     \item $I$ -- Input. 시프트 연산을 수행할 정수
@@ -191,14 +196,15 @@ $O$, $O_l$, $O_r$의 출력 핀을 가지고 있다. 각각은 다음을 의미�
 
 \pagebreak
 
-\subsection{OpCodeToFlags}
+\subsubsection{OpCodeToFlags}
 
-OpCodeToFlags는 4비트 연산자 코드를 ArithmetricLogic 플래그로 변환해주는
+OpCodeToFlags는 4비트 연산자 코드를 ArithmeticLogic 플래그로 변환해주는
 부품이다.
 
 OpCodeToFlags는 $O_c$의 입력 핀과
 $I_A$, $I_B$, $I_O$, $B_e$, $N$, $X$, $C_i$, $E$, $R$, $L$ 출력 핀을 가지고 있다.
-$I_A$, $I_B$, $I_O$, $B_e$, $N$, $X$, $C_i$는 ArithmetricLogic에 입력되는 핀이고
+이중에서 $O_c$는 4비트 입력 핀이다.
+$I_A$, $I_B$, $I_O$, $B_e$, $N$, $X$, $C_i$는 ArithmeticLogic에 입력되는 핀이고
 $E$, $R$, $L$는 Shiftre에 입력되는 핀이다.
 
 OpCodeToFlags의 진리표는 \tablename{} \ref{tab:octf}과 같다.
@@ -238,5 +244,71 @@ OpCodeToFlags의 회로도는 \figurename{} \ref{fig:octf}과 같다.
     \caption{OpCodeToFlags의 회로도}
     \label{fig:octf}
 \end{figure}
+
+\pagebreak
+
+\subsection{주요 부품}
+
+\subsubsection{ALU}
+
+ALU는 Arithmetic Logical Unit의 약자로,
+산술 연산과 논리 연산을 수행하고 그 결과를 출력하는 부품이다.
+
+ALU는 $A$, $B$, $O_c$의 입력 핀과
+$O$, $F_v$, $F_c$, $F_s$, $F_z$의 출력 핀으로 이루어져 있다.
+이중 $A$, $B$, $O$는 8비트 핀이고, $O_c$는 4비트 핀이다.
+각각이 의미하는 바는 다음과 같다.
+
+\begin{itemize}
+    \item $A$ -- A. 연산의 첫 번째 인자
+    \item $B$ -- B. 연산의 두 번째 인자
+    \item $O_c$ -- Operation Code. 연산의 종류.
+        $O_c$ 값에 따른 연산의 종류는 \tablename{} \ref{tab:aluopc}에서 설명되어있다.
+    \item $O$ -- Output. 연산의 결과.
+    \item $F_v$ -- Flag of oVerflow. 시프트 연산 중에 오버플로우가 발생하면
+        활성화되는 플래그
+    \item $F_c$ -- Flag of Carry. 가감산 연산 중에 올림수가 발생하면
+        활성화되는 플래그
+    \item $F_s$ -- Flag of Sign. 연산 결과의 부호를 나타내는 플래그.
+        $O < 0$이면 활성화된다.
+    \item $F_z$ -- Flag of Zero. 연산 결과가 $0$이면 활성화되는 플래그
+\end{itemize}
+
+\figurename{} \ref{fig:alu}는 ALU의 회로도이다.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.25]{ALU}
+    \caption{ALU 회로도}
+    \label{fig:alu}
+\end{figure}
+
+$O_c$ 값에 따라 수행되는 연산은 다음 \tablename{} \ref{tab:aluopc}과 같다.
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{rl|ll}
+        $O_c$ & 연산 이름 & 연산 & 설명\\
+        \hline
+        \texttt 0 & A    & $A$ & A \\
+        \texttt 1 & NOT  & $\neg A$ & NOT \\
+        \texttt 2 & NEG  & $- A$ & NEGative \\
+        \texttt 3 & SHL  & $A \ll 1$ & SHift Left \\
+        \texttt 4 & INC  & $A + 1$ & INCrease \\
+        \texttt 5 & DEC  & $A - 1$ DECrease \\
+        \texttt 6 & ADD  & $A + B$ & ADD \\
+        \texttt 7 & SUB  & $A - B$ & SUBtract \\
+        \texttt 8 & XOR  & $A \veebar B$ & eXclusive OR \\
+        \texttt 9 & XNOR & $\neg (A \veebar B)$ & eXclusive Not OR \\
+        \texttt A & AND  & $A \wedge B$ & AND \\
+        \texttt B & NAND & $\neg (A \wedge B)$ & Not AND \\
+        \texttt C & OR   & $A \vee B$ & OR \\
+        \texttt D & NOR  & $\neg (A \vee B)$ & Not OR \\
+        \texttt E & ASR  & $A \sim\gg 1$ & Arithmetic Shift Right \\
+        \texttt F & LSR  & $A \gg 1$ & Logical Shift Right \\
+    \end{tabular}
+    \caption{ALU의 $O_c$ 값에 따라 계산되는 연산}
+    \label{tab:aluopc}
+\end{table}
 
 \end{document}
