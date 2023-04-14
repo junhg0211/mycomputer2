@@ -191,8 +191,8 @@ $O$, $O_l$, $O_r$의 출력 핀을 가지고 있다.
         \hline
         \texttt{abcd efgh} & 0 & - & - & \texttt{abcd efgh} & 0 & 0 \\
         \texttt{abcd efgh} & 1 & 0 & - & \texttt{bcde fgh0} & \texttt a & 0 \\
-        \texttt{abcd efgh} & 1 & 1 & 0 & \texttt{0abc defg} & 0 & \texttt h \\
-        \texttt{abcd efgh} & 1 & 1 & 1 & \texttt{aabc defg} & 0 & \texttt h \\
+        \texttt{abcd efgh} & 1 & 1 & 0 & \texttt{aabc defg} & 0 & \texttt h \\
+        \texttt{abcd efgh} & 1 & 1 & 1 & \texttt{0abc defg} & 0 & \texttt h \\
     \end{tabular}
     \caption{Shiftre의 진리표}
     \label{tab:shr}
@@ -243,7 +243,7 @@ OpCodeToFlags의 진리표는 \tablename{} \ref{tab:octf}과 같다.
         \texttt{C} & OR   & 1 & 1 & 1 & 0 & 1 & 0 & 0 & 0 & \textit 1& \textit 0 \\
         \texttt{D} & NOR  & 1 & 1 & 0 & 0 & 1 & 0 & 0 & 0 & \textit 1& \textit 1\\
         \texttt{E} & ASR  & 0 & 0 & 0 & 0 & \textit 1& \textit 0 & 0 & 1 & 1 & 0 \\
-        \texttt{F} & ASR  & 0 & 0 & 0 & 0 & \textit 1& \textit 0 & 0 & 1 & 1 & 1 \\
+        \texttt{F} & LSR  & 0 & 0 & 0 & 0 & \textit 1& \textit 0 & 0 & 1 & 1 & 1 \\
     \end{tabular}
     \caption{OpCodeToFlags의 진리표}
     \label{tab:octf}
