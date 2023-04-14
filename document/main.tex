@@ -34,9 +34,7 @@ Mirésatanä의 개발은 2023년 4월에 시작되었다.
 
 \section{부품 설계}
 
-\subsection{보조 부품}
-
-\subsubsection{ArithmeticLogicBit}
+\subsection{ArithmeticLogicBit}
 
 ArithmeticLogicBit는 논리곱과 배타적 논리합,
 전가산 결과를 출력하는 ArithmeticLogic의 구성 부품이다.
@@ -80,7 +78,7 @@ ArithmeticLogicBit의 진리표는 \tablename{} \ref{tab:alb}과 같이 주어�
     \label{fig:alb}
 \end{figure}
 
-\subsubsection{ArithmeticLogic}
+\subsection{ArithmeticLogic}
 
 ArithmeticLogic은 8비트 정수의 산술 연산과 논리 연산을 수행하는 부품이다.
 
@@ -156,7 +154,7 @@ ArithmeticLogic은 \tablename{} \ref{tab:al}와 같은 진리표를 가진다.
 
 \pagebreak
 
-\subsubsection{Shiftre}
+\subsection{Shiftre}
 
 Shiftre는 입력된 값에 대한 1회 좌측·우측 시프트 연산 결과를 출력하는
 부품이다.
@@ -209,7 +207,7 @@ $O$, $O_l$, $O_r$의 출력 핀을 가지고 있다.
 
 \pagebreak
 
-\subsubsection{OpCodeToFlags}
+\subsection{OpCodeToFlags}
 
 OpCodeToFlags는 4비트 연산자 코드를 ArithmeticLogic 플래그로 변환해주는
 부품이다.
@@ -260,9 +258,7 @@ OpCodeToFlags의 회로도는 \figurename{} \ref{fig:octf}과 같다.
 
 \pagebreak
 
-\subsection{주요 부품}
-
-\subsubsection{ALU}
+\subsection{ALU}
 
 ALU는 Arithmetic Logical Unit의 약자로,
 산술 연산과 논리 연산을 수행하고 그 결과를 출력하는 부품이다.
@@ -298,7 +294,7 @@ $O$, $F_v$, $F_c$, $F_s$, $F_z$의 출력 핀으로 이루어져 있다.
 
 $O_c$ 값에 따라 수행되는 연산은 다음 \tablename{} \ref{tab:aluopc}과 같다.
 
-\begin{table}[h]
+\begin{table}
     \centering
     \begin{tabular}{rl|ll}
         $O_c$ & 연산 이름 & 연산 & 설명\\
@@ -322,6 +318,50 @@ $O_c$ 값에 따라 수행되는 연산은 다음 \tablename{} \ref{tab:aluopc}�
     \end{tabular}
     \caption{ALU의 $O_c$ 값에 따라 계산되는 연산}
     \label{tab:aluopc}
+\end{table}
+
+\pagebreak
+
+\subsection{Countre}
+
+Countre는 매 클락마다 현재 수의 다음 수를 계산하는 부품이다.
+Countre는 현재 실행하고 있는 명령어의 주소를 계산하는 데에 사용된다.
+
+Countre는 $I$, $E_w$, $\textit{c}$의 입력 핀과
+$O$, $c_o$의 출력 핀을 가지고 있다.
+이중에서 $I$, $O$는 8비트 핀이다.
+각각은 다음을 의미한다.
+
+\begin{itemize}
+    \item $I$ -- Input. $\overline{E_w}$일 때에 카운터에 적재할 값
+    \item $E_w$ -- Enable $\overline{\textrm{Write}}$. 카운터를 실행한다.
+        0으로 설정된 경우에는 $I$의 값을 카운터에 적재한다.
+    \item $c$ -- Clock. 시스템 클락
+    \item $O$ -- Output. 카운터에 적재되어있는 값
+    \item $c_o$ -- Clock Overflowed. 카운터 확장을 위해 사용되는 클락.
+        $\overline{O_7}$의 값과 같다.
+\end{itemize}
+
+\figurename{} \ref{fig:ctr}은 Countre의 회로도이고,
+\tablename{} \ref{tab:ctr}은 Countre의 표이다.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.35]{Countre}
+    \caption{Countre의 회로도}
+    \label{fig:ctr}
+\end{figure}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{cc|c}
+        $I$ & $E_w$ & $O$ \\
+        \hline
+        $I$ & 0 & $O+1$ \\
+        $I$ & 1 & $I$ \\
+    \end{tabular}
+    \caption{Countre의 표}
+    \label{tab:ctr}
 \end{table}
 
 \end{document}
