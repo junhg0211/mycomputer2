@@ -389,6 +389,7 @@ CPU에는 메모리를 연결하여 프로그래밍할 수 있으며,
     \item \texttt{II} -- Instruction register In. 메모리의 내용을 IR에 적재한다.
     \item \texttt{HLT} -- HaLT. 클락을 비활성화한다.
     \item \texttt{AO} -- A register Out. A 레지스터의 내용을 버스에 적재한다.
+    \item \texttt{CO} -- aCcumulator Out. 누산기의 내용을 버스에 적재한다.
 \end{enumerate}
 
 \subsection{명령어 해독기}
@@ -486,6 +487,70 @@ LDA 명령어는 다음 마이크로인스트럭션들로 이루어진다.
     \item \texttt{PO DI(0060)} -- 1 올린 PC의 내용을 MAR에 저장한다.
     \item \texttt{MO DI(00C0)} -- 메모리의 내용을 MAR에 저장한다.
     \item \texttt{MO AI PE(0282)} -- 메모리의 내용을 A 레지스터에 저장하고,
+        PC의 내용을 1 더 올린다.
+\end{enumerate}
+
+\subsubsection{\texttt{04} -- STC}
+
+STC는 STore aCcumulator의 약자로, 누산기에 있는 값을
+뒤에 따라오는 1B의 주소에 해당하는 메모리에 저장하는 명령어이다.
+명령어의 인스트럭션은 \texttt{04}이고 명령어의 길이는 2B이다.
+
+STC 명령어는 다음 마이크로인스트럭션들로 이루어진다.
+
+\begin{enumerate}
+    \item \texttt{PO DI(0060), MO II(0480), PE(0200)} -- 다음 명령어 실행을 준비한다.
+    \item \texttt{PO DI(0060)} -- 1 올린 PC의 내용을 MAR에 저장한다.
+    \item \texttt{MO DI(00C0)} -- 메모리에 써있는 주소를 MAR에 저장한다.
+    \item \texttt{CO MI PE(2300)} -- 누산기의 값을 메모리에 저장하고
+        PC의 내용을 1 더 올린다.
+\end{enumerate}
+
+\subsubsection{\texttt{05} -- LDC}
+
+LDC는 LoaD aCcumulator from memory의 약자로, 뒤에 따라오는 1B의 주소에 해당하는
+메모리의 값을 누산기에 불러오는 명령어이다.
+명령어의 인스트럭션은 \texttt{05}이고 명령어의 길이는 2B이다.
+
+LDA 명령어는 다음 마이크로인스트럭션들로 이루어진다.
+
+\begin{enumerate}
+    \item \texttt{PO DI(0060), MO II(0480), PE(0200)} -- 다음 명령어 실행을 준비한다.
+    \item \texttt{PO DI(0060)} -- 1 올린 PC의 내용을 MAR에 저장한다.
+    \item \texttt{MO DI(00C0)} -- 메모리의 내용을 MAR에 저장한다.
+    \item \texttt{MO CI PE(0284)} -- 메모리의 내용을 누산기에 저장하고,
+        PC의 내용을 1 더 올린다.
+\end{enumerate}
+
+\subsubsection{\texttt{06} -- SOC}
+
+SOC는 Select OpCode의 약자로, OR의 값을 뒤에 따라오는 1B 값으로 바꾼다.
+단, OR이 한번에 4bit의 값만 적재하므로 1B의 아래 4bit만 적재한다.
+명령어의 인스트럭션은 \texttt{06}이고 명령어의 길이는 2B이다.
+
+SOC 명령어는 다음 마이크로인스트럭션들로 이루어진다.
+
+\begin{enumerate}
+    \item \texttt{PO DI(0060), MO II(0480), PE(0200)} -- 다음 명령어 실행을 준비한다.
+    \item \texttt{PO DI(0060)} -- 1 올린 PC의 내용을 MAR에 저장한다.
+    \item \texttt{MO OI PE(0288)} -- 메모리의 내용을 OR에 저장하고,
+        PC의 내용을 1 더 올린다.
+\end{enumerate}
+
+\subsubsection{\texttt{07} -- CMP}
+
+ADD는 A 레지스터의 값과 뒤에 따라오는 1B의 주소에 해당하는 메모리의 값을
+OR에 저장된 연산에 따라 계산하고 누산기에 적재하는 명령어이다.
+명령어의 인스트럭션은 \texttt{06}이고 명령어의 길이는 2B이다.
+
+CMP 명령어는 다음 마이크로인스트럭션들로 이루어진다.
+
+\begin{enumerate}
+    \item \texttt{PO DI(0060), MO II(0480), PE(0200)} -- 다음 명령어 실행을 준비한다.
+    \item \texttt{PO DI(0060)} -- 1 올린 PC의 내용을 MAR에 저장한다.
+    \item \texttt{MO DI(00C0)} -- 메모리의 내용을 MAR에 저장한다.
+    \item \texttt{MO CI (0084)} -- 메모리의 내용을 누산기에 저장한다.
+    \item \texttt{LO CI PE (0205)} -- ALU의 내용을 누산기에 저장하고,
         PC의 내용을 1 더 올린다.
 \end{enumerate}
 
