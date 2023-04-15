@@ -376,19 +376,19 @@ CPU에는 메모리를 연결하여 프로그래밍할 수 있으며,
 
 \begin{enumerate}
     \setcounter{enumi}{-1}
-    \item \texttt{LO} -- aLu Out
-    \item \texttt{AI} -- A register In
-    \item \texttt{CI} -- aCcumulator In
-    \item \texttt{OI} -- Opcode register In
-    \item \texttt{PW} -- Program counter Write
-    \item \texttt{PO} -- Program counter Out
-    \item \texttt{DI} -- aDdress register In
-    \item \texttt{MO} -- Memory Out
-    \item \texttt{MI} -- Memory In
-    \item \texttt{PE} -- Program counter Enable
-    \item \texttt{II} -- Instruction register In
-    \item \texttt{HLT} -- HaLT
-    \item \texttt{AO} -- A register Out
+    \item \texttt{LO} -- aLu Out. ALU의 출력을 버스에 적재한다.
+    \item \texttt{AI} -- A register In. 버스의 내용을 A 레지스터에 적재한다.
+    \item \texttt{CI} -- aCcumulator In. 버스의 내용을 누산기에 적재한다.
+    \item \texttt{OI} -- Opcode register In. 버스의 내용 중 하위 4bit를 OR에 적재한다.
+    \item \texttt{PW} -- Program counter Write. 버스의 내용을 PC에 적재한다.
+    \item \texttt{PO} -- Program counter Out. PC의 내용을 버스에 적재한다.
+    \item \texttt{DI} -- aDdress register In. 버스의 내용을 MAR에 적재한다.
+    \item \texttt{MO} -- Memory Out. 메모리의 내용을 버스에 적재한다.
+    \item \texttt{MI} -- Memory In. 버스의 내용을 메모리에 적재한다.
+    \item \texttt{PE} -- Program counter Enable. PC의 내용을 1 증가시킨다.
+    \item \texttt{II} -- Instruction register In. 메모리의 내용을 IR에 적재한다.
+    \item \texttt{HLT} -- HaLT. 클락을 비활성화한다.
+    \item \texttt{AO} -- A register Out. A 레지스터의 내용을 버스에 적재한다.
 \end{enumerate}
 
 \subsection{명령어 해독기}
@@ -453,8 +453,8 @@ LDI 명령어는 다음 마이크로인스트럭션들로 이루어진다.
 \begin{enumerate}
     \item \texttt{PO DI(0060), MO II(0480), PE(0200)} -- 다음 명령어 실행을 준비한다.
     \item \texttt{PO DI(0060)} -- 1 올린 PC의 내용을 MAR에 저장한다.
-    \item \texttt{AI MO(0082)} -- 메모리에 써있는 내용을 A 레지스터에 옮긴다.
-    \item \texttt{PE(0200)} -- PC의 내용을 1 더 올린다.
+    \item \texttt{AI MO PE(0282)} -- 메모리에 써있는 내용을 A 레지스터에 옮기고
+        PC의 내용을 1 더 올린다.
 \end{enumerate}
 
 \subsubsection{\texttt{02} -- STA}
@@ -469,8 +469,8 @@ STA 명령어는 다음 마이크로인스트럭션들로 이루어진다.
     \item \texttt{PO DI(0060), MO II(0480), PE(0200)} -- 다음 명령어 실행을 준비한다.
     \item \texttt{PO DI(0060)} -- 1 올린 PC의 내용을 MAR에 저장한다.
     \item \texttt{MO DI(00C0)} -- 메모리에 써있는 주소를 MAR에 저장한다.
-    \item \texttt{AO MI(1100)} -- A 레지스터의 값을 메모리에 저장한다.
-    \item \texttt{PE(0200)} -- PC의 내용을 1 더 올린다.
+    \item \texttt{AO MI PE(1300)} -- A 레지스터의 값을 메모리에 저장하고
+        PC의 내용을 1 더 올린다.
 \end{enumerate}
 
 \subsubsection{\texttt{03} -- LDA}
@@ -485,8 +485,8 @@ LDA 명령어는 다음 마이크로인스트럭션들로 이루어진다.
     \item \texttt{PO DI(0060), MO II(0480), PE(0200)} -- 다음 명령어 실행을 준비한다.
     \item \texttt{PO DI(0060)} -- 1 올린 PC의 내용을 MAR에 저장한다.
     \item \texttt{MO DI(00C0)} -- 메모리의 내용을 MAR에 저장한다.
-    \item \texttt{MO AI(0082)} -- 메모리의 내용을 A 레지스터에 저장한다.
-    \item \texttt{PE(0200)} -- PC의 내용을 1 더 올린다.
+    \item \texttt{MO AI PE(0282)} -- 메모리의 내용을 A 레지스터에 저장하고,
+        PC의 내용을 1 더 올린다.
 \end{enumerate}
 
 \subsubsection{\texttt{FF} -- HLT}
