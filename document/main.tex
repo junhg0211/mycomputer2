@@ -388,6 +388,7 @@ CPU에는 메모리를 연결하여 프로그래밍할 수 있으며,
     \item \texttt{PE} -- Program counter Enable
     \item \texttt{II} -- Instruction register In
     \item \texttt{HLT} -- HaLT
+    \item \texttt{AO} -- A register Out
 \end{enumerate}
 
 \subsection{명령어 해독기}
@@ -453,6 +454,22 @@ LDI 명령어는 다음 마이크로인스트럭션들로 이루어진다.
     \item \texttt{PO DI(0060), MO II(0480), PE(0200)} -- 다음 명령어 실행을 준비한다.
     \item \texttt{PO DI(0060)} -- 1 올린 PC의 내용을 MAR에 저장한다.
     \item \texttt{AI MO(0082)} -- 메모리에 써있는 내용을 A 레지스터에 옮긴다.
+    \item \texttt{PE(0200)} -- PC의 내용을 1 더 올린다.
+\end{enumerate}
+
+\subsubsection{\texttt{02} -- STA}
+
+STA는 STore A register의 약자로, A 레지스터에 있는 값을
+뒤에 따라오는 1B의 주소에 해당하는 메모리에 저장하는 명령어이다.
+명령어의 인스트럭션은 \texttt{02}이고 명령어의 길이는 2B이다.
+
+STA 명령어는 다음 마이크로인스트럭션들로 이루어진다.
+
+\begin{enumerate}
+    \item \texttt{PO DI(0060), MO II(0480), PE(0200)} -- 다음 명령어 실행을 준비한다.
+    \item \texttt{PO DI(0060)} -- 1 올린 PC의 내용을 MAR에 저장한다.
+    \item \texttt{MO DI(00C0)} -- 메모리에 써있는 주소를 MAR에 저장한다.
+    \item \texttt{AO MI(1100)} -- A 레지스터의 값을 메모리에 저장한다.
     \item \texttt{PE(0200)} -- PC의 내용을 1 더 올린다.
 \end{enumerate}
 
