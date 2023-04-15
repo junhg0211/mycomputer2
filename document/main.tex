@@ -513,8 +513,6 @@ STC 명령어는 다음 마이크로인스트럭션들로 이루어진다.
         PC의 내용을 1 더 올린다.
 \end{enumerate}
 
-\subsubsection{\texttt{05} -- }
-
 \subsubsection{\texttt{06} -- SOC}
 
 SOC는 Select OpCode의 약자로, OR의 값을 뒤에 따라오는 1B 값으로 바꾼다.
@@ -547,6 +545,20 @@ CMP 명령어는 다음 마이크로인스트럭션들로 이루어진다.
     \item \texttt{MO CI (0084)} -- 메모리의 내용을 누산기에 저장한다.
     \item \texttt{LO CI PE (0205)} -- ALU의 내용을 누산기에 저장하고,
         PC의 내용을 1 더 올린다.
+\end{enumerate}
+
+\subsubsection{\texttt{08} -- JMP}
+
+JMP는 JuMP의 약자로, 뒤에 따라오는 주소에 있는 명령어를 실행한다.
+명령어의 인스트럭션은 \texttt{08}이고 명령어의 길이는 2B이다.
+
+JMP 명령어는 다음 마이크로인스트럭션들로 이루어진다.
+
+\begin{enumerate}
+    \item \texttt{PO DI(0060), MO II PE(0680)} -- 다음 명령어 실행을 준비한다.
+    \setcounter{enumi}{2}
+    \item \texttt{PO DI(0060)} -- 1 올린 PC의 내용을 MAR에 저장한다.
+    \item \texttt{MO PW(0090)} -- 메모리의 내용을 PC에 저장한다.
 \end{enumerate}
 
 \subsubsection{\texttt{FF} -- HLT}
